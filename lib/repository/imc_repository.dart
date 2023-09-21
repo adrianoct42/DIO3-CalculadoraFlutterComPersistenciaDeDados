@@ -21,12 +21,14 @@ class ImcRepository {
   }
 
   salvar(List<ImcModel> imcModel) async {
-    await _box.put('imc_model', imcModel);
+    await _box.put("imc_model", imcModel);
   }
 
   List<ImcModel> obterDados() {
     List<ImcModel> imcModel = _box.get("imc_model");
-    debugPrint(imcModel[0].toString());
+    if (imcModel.isEmpty) {
+      return <ImcModel>[];
+    }
     return imcModel;
   }
 }

@@ -13,19 +13,10 @@ class ImcModel extends HiveObject {
   get peso => _peso;
   get altura => _altura;
 
-  set setPeso(double? peso) {
-    _peso = peso;
-  }
-
-  set setAltura(double? altura) {
-    _altura = altura;
-  }
-
   ImcModel(this._peso, this._altura);
 
   ImcModel.vazio() {
-    _peso = 0;
-    _altura = 0;
+    <ImcModel>[];
   }
 
   String imcString() {

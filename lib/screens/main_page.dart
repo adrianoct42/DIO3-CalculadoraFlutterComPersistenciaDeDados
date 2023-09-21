@@ -23,8 +23,10 @@ class _MainPageState extends State<MainPage> {
   }
 
   void carregarDados() async {
-    // INICIALIZA UMA BOX OU ABRE
+    // INICIALIZA UMA BOX OU ABRE JA EXISTENTE
     imcRepository = await ImcRepository.start();
+    // CARREGA DADOS SALVOS ANTERIORMENTE:
+    listaImc = imcRepository.obterDados();
     setState(() {});
   }
 
@@ -88,10 +90,9 @@ class _MainPageState extends State<MainPage> {
                           double.parse(alturaController.text),
                         ),
                       );
-                      imcRepository.salvar(listaImc);
-                      setState(() {});
                     }
-                    pesoController.text = alturaController.text = "";
+                    imcRepository.salvar(listaImc);
+                    // pesoController.text = alturaController.text = "";
                   },
                 ),
               ),
@@ -110,11 +111,10 @@ class _MainPageState extends State<MainPage> {
                     // Coloquei ASYNC AWAIT mas não tenho certeza se é necessário.
                     // Sugestão: Tente fazer o carregamento aqui, MANUAL, sem chamar o método carregar... Digite-o aqui, recorte e cole do imc_repository...
 
-                    var visualizarLista = imcRepository.obterDados();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ImcRecords(visualizarLista)),
+                          builder: (context) => ImcRecords(listaImc)),
                     );
                   },
                 ),
